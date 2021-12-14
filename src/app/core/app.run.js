@@ -18,7 +18,7 @@
      */
     function RunFn(UserService, $location) {
         if (!UserService.isLogined()) {
-            $location.path("/login");
+            $location.path("/");
         }
     }
 
