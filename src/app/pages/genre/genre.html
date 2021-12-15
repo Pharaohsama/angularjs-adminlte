@@ -18,11 +18,18 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" >
+        <form role="form">
             <div class="box-body">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Genre</label>
-                    <input type="text" ng-model="name"  class="form-control" id="exampleInputEmail1" placeholder="Enter genre(action,comedy...)">
+
+
+                <div ng-class="{'form-group': true, 'has-success':success,'has-error':error}">
+                    <label ng-show="!(success || error)" class="control-label" for="input-genre">Genre </label>
+                    <label ng-show="success" class="control-label" for="input-genre"><i class="fa fa-check"></i> Genre </label>
+                    <label ng-show="error" class="control-label" for="input-genre"><i class="fa fa-times-circle-o"></i> Genre </label>
+
+                    <input type="text" ng-model="name" class="form-control" id="input-genre"
+                           placeholder="Enter genre(action,comedy...)">
+
                 </div>
 
             </div>

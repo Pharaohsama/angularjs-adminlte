@@ -32,20 +32,32 @@
      *
      * @constructor
      */
-    function ControllerFn($scope,$http) {
+    function ControllerFn($scope, $http) {
         var vm = this;
-        $scope.name= null;
-        $scope.postData = function (name){
+        $scope.name = null;
+        $scope.success = false;
+        $scope.error = false;
+        $scope.postData = function (name) {
             //creating object to pass data to the srvice
-            var data ={
+            var data = {
                 name: name,
             }
-            $http.post("http://localhost:8080/api/genres",JSON.stringify(data))
-                .then(function (response) {
-                    console.log(response);
-                    
-                })
+            $http.post("http://localhost:8080/api/genres", JSON.stringify(data))
+                .then(function success(response) {
+                        console.log(response);
+                        $scope.name = null;
+                        $scope.success = true;
+                        $scope.error = false;
+                    }
+                    , function error(response) {
+                        console.log(response);
+                        $scope.name = null;
+                        $scope.error = true;
+                        $scope.success = false;
+                    }
+                )
         }
 
 
-    }})();
+    }
+})();
