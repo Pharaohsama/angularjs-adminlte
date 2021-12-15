@@ -34,21 +34,23 @@
      */
     function ControllerFn($scope, $http) {
         var vm = this;
+
         $scope.name = null;
         $scope.success = false;
         $scope.error = false;
         $scope.allGenres = [];
+        $scope.table = initialiseTable();
         $scope.getData = () => {
             $http.get("http://localhost:8080/api/genres")
                 .then(function success(response) {
                     $scope.allGenres = response.data;
+                    $scope.table.destroy();
+                    initialiseTable();
                     console.log($scope.allGenres);
-                }).then(() => {
-                initialiseTable();
-            });
+                })
         }
         $scope.postData = function (name) {
-            //creating object to pass data to the srvice
+            //creating object to pass data to the service
             var data = {
                 name: name,
             }
@@ -72,8 +74,8 @@
         $scope.getData();
 
         function initialiseTable() {
-            $(document).ready(function () {
-                $('#genreData').DataTable({
+            let table = $(document).ready(function () {
+                $scope.table = $('#genreData').DataTable({
                     data: $scope.allGenres,
                     columns: [
                         {"data": "id"},
@@ -81,6 +83,7 @@
                     ]
                 });
             });
+            return table;
         }
     }
 })();
