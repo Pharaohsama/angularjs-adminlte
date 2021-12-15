@@ -22,9 +22,12 @@
 
 
                 <div ng-class="{'form-group': true, 'has-success':success,'has-error':error}">
-                    <label ng-show="!(success || error)" class="control-label" for="input-nationality">Nationality</label>
-                    <label ng-show="success" class="control-label" for="input-nationality"><i class="fa fa-check"></i> Nationality </label>
-                    <label ng-show="error" class="control-label" for="input-nationality"><i class="fa fa-times-circle-o"></i> Nationality </label>
+                    <label ng-show="!(success || error)" class="control-label"
+                           for="input-nationality">Nationality</label>
+                    <label ng-show="success" class="control-label" for="input-nationality"><i class="fa fa-check"></i>
+                        Nationality </label>
+                    <label ng-show="error" class="control-label" for="input-nationality"><i
+                            class="fa fa-times-circle-o"></i> Nationality </label>
 
                     <input type="text" ng-model="name" class="form-control" id="input-nationality"
                            placeholder="Enter nationalities">
@@ -39,4 +42,33 @@
             </div>
         </form>
     </div>
+    <!-- /.box -->
+    <!-- form end -->
+    <!-- table start -->
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title"> Nationality Table</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table id="natData" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nationality</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>Id</th>
+                    <th>Nationality</th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
 </section>
