@@ -37,13 +37,16 @@
         $scope.name = null;
         $scope.success = false;
         $scope.error = false;
-        $scope.allGenres=[];
-        $http.get("http://localhost:8080/api/genres")
-            .then(function success(response) {
-                $scope.allGenres = response.data;
-                console.log($scope.allGenres);
-            })
-
+        $scope.allGenres = [];
+        $scope.getData = () => {
+            $http.get("http://localhost:8080/api/genres")
+                .then(function success(response) {
+                    $scope.allGenres = response.data;
+                    console.log($scope.allGenres);
+                }).then(() => {
+                initialiseTable();
+            });
+        }
         $scope.postData = function (name) {
             //creating object to pass data to the srvice
             var data = {
@@ -55,6 +58,7 @@
                         $scope.name = null;
                         $scope.success = true;
                         $scope.error = false;
+                        $scope.getData();
                     }
                     , function error(response) {
                         console.log(response);
@@ -64,10 +68,20 @@
                     }
                 )
         }
-        $(document).ready(function () {
-            $('#genreData').DataTable();
-        });
 
+        $scope.getData();
+
+        function initialiseTable() {
+            $(document).ready(function () {
+                $('#genreData').DataTable({
+                    data: $scope.allGenres,
+                    columns: [
+                        {"data": "id"},
+                        {"data": "name"},
+                    ]
+                });
+            });
+        }
     }
 })();
 
