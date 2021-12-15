@@ -37,6 +37,13 @@
         $scope.name = null;
         $scope.success = false;
         $scope.error = false;
+        $scope.allGenres=[];
+        $http.get("http://localhost:8080/api/genres")
+            .then(function success(response) {
+                $scope.allGenres = response.data;
+                console.log($scope.allGenres);
+            })
+
         $scope.postData = function (name) {
             //creating object to pass data to the srvice
             var data = {
@@ -57,7 +64,10 @@
                     }
                 )
         }
-
+        $(document).ready(function () {
+            $('#genreData').DataTable();
+        });
 
     }
 })();
+
