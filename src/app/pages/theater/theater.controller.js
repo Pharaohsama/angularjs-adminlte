@@ -19,7 +19,7 @@
             url: '/theater',
             views: {
                 'content@app': {
-                    templateUrl: 'app/pages/theatre/theater.html',
+                    templateUrl: 'app/pages/theater/theater.html',
                     controller: ControllerFn,
                     controllerAs: 'vmTheater'
                 }
