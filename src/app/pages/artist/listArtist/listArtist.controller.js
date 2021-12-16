@@ -15,11 +15,11 @@
      * @param $stateProvider
      */
     function configFn($stateProvider) {
-        $stateProvider.state('app.artistlist', {
-            url: '/artist',
+        $stateProvider.state('app.allartist', {
+            url: '/allartist',
             views: {
                 'content@app': {
-                    templateUrl: 'app/pages/artist/listArtist.html',
+                    templateUrl: 'app/pages/artist/listArtist/listArtist.html',
                     controller: ControllerFn,
                     controllerAs: 'vmArtist'
                 }
@@ -36,54 +36,40 @@
         var vm = this;
 
         $scope.name = null;
+        $scope.type= null;
+        $scope.nationality = null;
         $scope.success = false;
         $scope.error = false;
-        $scope.allTheaters = [];
+        $scope.allArtists = [];
         $scope.table = initialiseTable();
         $scope.getData = () => {
-            $http.get("http://localhost:8080/api/theatres")
+            $http.get("http://localhost:8080/api/artists")
                 .then(function success(response) {
-                    $scope.allTheatres = response.data;
+                    $scope.allArtists = response.data;
                     $scope.table.destroy();
                     initialiseTable();
-                    console.log($scope.allTheatres);
+                    console.log($scope.allArtists);
                 })
         }
-        $scope.postData = function (name) {
-            //creating object to pass data to the service
-            var data = {
-                name: name,
-            }
-            $http.post("http://localhost:8080/api/theatres", JSON.stringify(data))
-                .then(function success(response) {
-                        console.log(response);
-                        $scope.name = null;
-                        $scope.success = true;
-                        $scope.error = false;
-                        $scope.getData();
-                    }
-                    , function error(response) {
-                        console.log(response);
-                        $scope.name = null;
-                        $scope.error = true;
-                        $scope.success = false;
-                    }
-                )
-        }
+
 
         $scope.getData();
 
         function initialiseTable() {
             let table = $(document).ready(function () {
-                $scope.table = $('#theatreData').DataTable({
-                    data: $scope.allTheatres,
+                $scope.table = $('#artistsData').DataTable({
+                    data: $scope.allArtists,
                     columns: [
                         {"data": "id"},
                         {"data": "name"},
+                        {"data": "type"},
+                        {"data": "nationality.name"},
+
                     ]
                 });
             });
             return table;
         }
     }
+
 })();

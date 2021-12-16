@@ -35,13 +35,13 @@
                 <div class="form-group">
                     <label>Artist Type :</label>
                     <select ng-model="type" class="form-control select2" style="width: 100%;">
-                        <option value="0" selected="selected">Actor</option>
+                        <option value="0" >Actor</option>
                         <option value="1">Director</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Nationnality : </label>
-                    <select ng-model="n" class="form-control select2">
+                    <select ng-model="nationality" class="form-control select2">
                         <option ng-repeat="nationality in allNationalities" value="{{nationality.id}}">{{nationality.name}}</option>
                     </select>
                 </div>
@@ -51,7 +51,7 @@
             <!-- /.box-body -->
 
             <div class="box-footer">
-                <button type="submit" class="btn btn-primary" ng-click="postData(name,type,n)">ADD</button>
+                <button type="submit" class="btn btn-primary" ng-click="postData(name,type,nationality)">ADD</button>
             </div>
         </form>
     </div>
