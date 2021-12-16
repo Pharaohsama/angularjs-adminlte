@@ -41,7 +41,7 @@
         $scope.allTheaters = [];
         $scope.table = initialiseTable();
         $scope.getData = () => {
-            $http.get("http://localhost:8080/api/theatres")
+            $http.get("http://localhost:8080/api/theaters")
                 .then(function success(response) {
                     $scope.allTheatres = response.data;
                     $scope.table.destroy();
@@ -54,7 +54,7 @@
             var data = {
                 name: name,
             }
-            $http.post("http://localhost:8080/api/theatres", JSON.stringify(data))
+            $http.post("http://localhost:8080/api/theaters", JSON.stringify(data))
                 .then(function success(response) {
                         console.log(response);
                         $scope.name = null;
