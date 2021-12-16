@@ -15,11 +15,11 @@
      * @param $stateProvider
      */
     function configFn($stateProvider) {
-        $stateProvider.state('app.movie', {
+        $stateProvider.state('app.listMovie', {
             url: '/movie',
             views: {
                 'content@app': {
-                    templateUrl: 'app/pages/movie/movie.html',
+                    templateUrl: 'app/pages/movie/listMovie/listMovie.html',
                     controller: ControllerFn,
                     controllerAs: 'vmMovie'
                 }
@@ -36,4 +36,4 @@
         var vm = this;
 
 
-}})();
+    }})();

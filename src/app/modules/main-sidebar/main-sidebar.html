@@ -15,10 +15,15 @@
         <!-- sidebar menu -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
-            <li ui-sref-active="active">
-                <a ui-sref="app.movie"><i class="fa fa-camera-retro"></i> <span>Add Movie</span>
-                    <span class="pull-right-container"></span>
+            <li class="treeview">
+                <a href="#"><i class="fa fa-camera-retro"></i><span>Movie</span>
+                    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                 </a>
+                <ul class="treeview-menu">
+                    <li ui-sref-active="active"><a ui-sref="app.addMovie"><i class="fa fa-plus-square"></i> Add Movie</a></li>
+                    <li ui-sref-active="active"><a ui-sref="app.listMovie"><i class="fa fa-newspaper-o"></i> Movies List</a></li>
+
+                </ul>
             </li>
             <li ui-sref-active="active">
                 <a ui-sref="app.theatre"><i class="fa fa-video-camera"></i> <span>Theaters</span>

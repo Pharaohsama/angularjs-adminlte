@@ -15,13 +15,13 @@
      * @param $stateProvider
      */
     function configFn($stateProvider) {
-        $stateProvider.state('app.theatre', {
-            url: '/theatre',
+        $stateProvider.state('app.theater', {
+            url: '/theater',
             views: {
                 'content@app': {
-                    templateUrl: 'app/pages/theatre/theatre.html',
+                    templateUrl: 'app/pages/theatre/theater.html',
                     controller: ControllerFn,
-                    controllerAs: 'vmTheatre'
+                    controllerAs: 'vmTheater'
                 }
             }
         });
@@ -43,10 +43,10 @@
         $scope.getData = () => {
             $http.get("http://localhost:8080/api/theaters")
                 .then(function success(response) {
-                    $scope.allTheatres = response.data;
+                    $scope.allTheaters = response.data;
                     $scope.table.destroy();
                     initialiseTable();
-                    console.log($scope.allTheatres);
+                    console.log($scope.allTheaters);
                 })
         }
         $scope.postData = function (name) {
@@ -75,8 +75,8 @@
 
         function initialiseTable() {
             let table = $(document).ready(function () {
-                $scope.table = $('#theatreData').DataTable({
-                    data: $scope.allTheatres,
+                $scope.table = $('#theaterData').DataTable({
+                    data: $scope.allTheaters,
                     columns: [
                         {"data": "id"},
                         {"data": "name"},
