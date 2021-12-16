@@ -34,7 +34,8 @@
                 </div>
                 <div class="form-group">
                     <label>Artist Type :</label>
-                    <select ng-model="type" class="form-control select2" style="width: 100%;">
+                    <select ng-model="type" class="form-control" style="width: 100%;">
+                        <option value="">Select Artist's type</option>
                         <option value="0" >Actor</option>
                         <option value="1">Director</option>
                     </select>
@@ -42,6 +43,7 @@
                 <div class="form-group">
                     <label>Nationnality : </label>
                     <select ng-model="nationality" class="form-control select2">
+                        <option value="">Select Artist's nationality</option>
                         <option ng-repeat="nationality in allNationalities" value="{{nationality.id}}">{{nationality.name}}</option>
                     </select>
                 </div>

@@ -74,6 +74,7 @@
         }
 
         $scope.getData();
+        $('.select2').select2();
     }
 
 })();
