@@ -37,9 +37,9 @@
 
         $scope.name = null;
         $scope.type= null;
-        $scope.n = null;
         $scope.success = false;
         $scope.error = false;
+        $scope.n = null;
         $scope.allNationalities = [];
         $scope.getData = () => {
             $http.get("http://localhost:8080/api/nationalities")
@@ -49,12 +49,12 @@
                 })
         }
 
-        $scope.postData = function (name,type,nationality) {
+        $scope.postData = function (name,type,n) {
             //creating object to pass data to the service
             var data = {
                 name: name,
                 type: type,
-                nationality : nationality,
+                nationality : n ,
             }
             $http.post("http://localhost:8080/api/artists", JSON.stringify(data))
                 .then(function success(response) {
@@ -74,7 +74,6 @@
         }
 
         $scope.getData();
-        $('.select2').select2();
     }
 
 })();

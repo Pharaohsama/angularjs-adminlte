@@ -65,6 +65,7 @@
                         {"data": "type"},
                         {"data": "nationality.name"},
 
+
                     ]
                 });
             });

@@ -42,7 +42,7 @@
                 </div>
                 <div class="form-group">
                     <label>Nationnality : </label>
-                    <select ng-model="nationality" class="form-control select2">
+                    <select ng-model="n" class="form-control select2">
                         <option value="">Select Artist's nationality</option>
                         <option ng-repeat="nationality in allNationalities" value="{{nationality.id}}">{{nationality.name}}</option>
                     </select>
@@ -53,7 +53,7 @@
             <!-- /.box-body -->
 
             <div class="box-footer">
-                <button type="submit" class="btn btn-primary" ng-click="postData(name,type,nationality)">ADD</button>
+                <button type="submit" class="btn btn-primary" ng-click="postData(name,type,n)">ADD</button>
             </div>
         </form>
     </div>
