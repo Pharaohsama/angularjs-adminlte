@@ -34,6 +34,7 @@
      */
     function ControllerFn($scope, $http) {
         var vm = this;
+        $scope.file = null;
         $scope.allNationalities = [];
         $scope.getData = () => {
             $http.get("http://localhost:8080/api/nationalities")
@@ -62,6 +63,7 @@
             autoclose: true
         })
         $scope.postData = function (title, description, duration, release, na, dir, actors, genres, pos) {
+            var dataForm = new FormData();
             var data = {
                 title: title,
                 description: description,
@@ -71,10 +73,31 @@
                 director: $('#director').val(),
                 actors: $('#actors').val(),
                 genres: $('#genres').val(),
-                // poster: pos,
+                poster: file.files[0],
             }
+
+            data.nationality = data.nationality[0];
+            
+            data.director = data.director[0];
+            
+            data.actors = data.actors.map(actorId => Number(actorId));
+
+            data.genres = data.genres.map(genreId => Number(genreId));
+
+            console.log(data.director, data.nationality, data.actors, data.genres);
+
+            dataForm.append("title", data.title);
+            dataForm.append("description", data.description);
+            dataForm.append("durationInMin", data.durationInMin);
+            dataForm.append("releaseDate", "2021-12-17");
+            dataForm.append("nationality", data.nationality);
+            dataForm.append("director", data.director);
+            dataForm.append("actors", data.actors);
+            dataForm.append("genres", data.genres);
+            dataForm.append("poster", data.poster);
+
             console.log(JSON.stringify(data));
-            $http.post("http://localhost:8080/api/movies", data, {transformRequest: angular.identity,headers: {'Content-Type': undefined}})
+            $http.post("http://localhost:8080/api/movies", dataForm, {transformRequest: angular.identity,headers: {'Content-Type': undefined}})
                 .then(function success(response) {
                         console.log(response);
                     }

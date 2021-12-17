@@ -69,9 +69,6 @@
                         {"data": "director.name"},
                         {"data": "nationality.name"},
                         {"data": "description"},
-
-
-
                     ]
                 });
             });
