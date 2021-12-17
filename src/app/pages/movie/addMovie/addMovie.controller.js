@@ -58,17 +58,21 @@
                     console.log($scope.allGenres);
                 })
         }
+
         $scope.getData();
+
         $('#datepicker').datepicker({
+            format: "yyyy-mm-dd",
             autoclose: true
         })
+
         $scope.postData = function (title, description, duration, release, na, dir, actors, genres, pos) {
             var dataForm = new FormData();
             var data = {
                 title: title,
                 description: description,
                 durationInMin: duration,
-                releaseDate: release,
+                releaseDate: $('#datepicker').val(),
                 nationality: $('#nationality').val(),
                 director: $('#director').val(),
                 actors: $('#actors').val(),
@@ -84,12 +88,12 @@
 
             data.genres = data.genres.map(genreId => Number(genreId));
 
-            console.log(data.director, data.nationality, data.actors, data.genres);
+            console.log(data.releaseDate);
 
             dataForm.append("title", data.title);
             dataForm.append("description", data.description);
             dataForm.append("durationInMin", data.durationInMin);
-            dataForm.append("releaseDate", "2021-12-17");
+            dataForm.append("releaseDate", data.releaseDate);
             dataForm.append("nationality", data.nationality);
             dataForm.append("director", data.director);
             dataForm.append("actors", data.actors);
