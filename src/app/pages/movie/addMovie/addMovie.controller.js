@@ -32,9 +32,9 @@
      *
      * @constructor
      */
-    function ControllerFn($scope,$http) {
+    function ControllerFn($scope, $http) {
         var vm = this;
-        $scope.allNationalities =[];
+        $scope.allNationalities = [];
         $scope.getData = () => {
             $http.get("http://localhost:8080/api/nationalities")
                 .then(function success(response) {
@@ -61,5 +61,27 @@
         $('#datepicker').datepicker({
             autoclose: true
         })
+        $scope.postData = function (title, description, duration, release, nationality, D, A, G, poster) {
+            var data = {
+                title: title,
+                description: description,
+                durationInMin: duration,
+                releaseDate: release,
+                nationality: nationality,
+                director: D,
+                genres: G,
+                actors: A,
+                poster: poster,
+            }
+            $http.post("http://localhost:8080/api/movies", JSON.stringify(data))
+                .then(function success(response) {
+                        console.log(response);
+                    }
+                    , function error(response) {
+                        console.log(response);
+                    }
+                )
+        }
         $('.select2').select2()
-}})();
+    }
+})();
