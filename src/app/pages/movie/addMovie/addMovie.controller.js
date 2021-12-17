@@ -61,19 +61,20 @@
         $('#datepicker').datepicker({
             autoclose: true
         })
-        $scope.postData = function (title, description, duration, release, nationality, D, A, G, poster) {
+        $scope.postData = function (title, description, duration, release, na, dir, actors, genres, pos) {
             var data = {
                 title: title,
                 description: description,
                 durationInMin: duration,
                 releaseDate: release,
-                nationality: nationality,
-                director: D,
-                genres: G,
-                actors: A,
-                poster: poster,
+                nationality: $('#nationality').val(),
+                director: $('#director').val(),
+                actors: $('#actors').val(),
+                genres: $('#genres').val(),
+                // poster: pos,
             }
-            $http.post("http://localhost:8080/api/movies", JSON.stringify(data))
+            console.log(JSON.stringify(data));
+            $http.post("http://localhost:8080/api/movies", data, {transformRequest: angular.identity,headers: {'Content-Type': undefined}})
                 .then(function success(response) {
                         console.log(response);
                     }

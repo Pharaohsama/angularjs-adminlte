@@ -50,7 +50,7 @@
                 </div>
                 <div class="form-group">
                     <label>Nationality:</label>
-                    <select ng-model="N" class="form-control select2" style="width: 100%;">
+                    <select id="nationality" ng-model="na" class="form-control select2" style="width: 100%;">
                         <option  ng-repeat="nationality in allNationalities" value="{{nationality.id}}">
                             {{nationality.name}}
                         </option>
@@ -58,14 +58,14 @@
                 </div>
                 <div class="form-group">
                     <label>Director Selection:</label>
-                    <select ng-model="D" class="form-control select2" style="width: 100%;" data-placeholder="Select a Director">
+                    <select id="director" ng-model="dir" class="form-control select2" style="width: 100%;" data-placeholder="Select a Director">
                         <option  ng-repeat="director in allDirectors" value="{{director.id}}">{{director.name}}</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label>Actors Selection:</label>
-                    <select ng-model="A" class="form-control select2" multiple="multiple" data-placeholder="Select Actors"
+                    <select id="actors" ng-model="actors" class="form-control select2" multiple="multiple" data-placeholder="Select Actors"
                             style="width: 100%;">
                         <option  ng-repeat="actor in allActors" value="{{actor.id}}">{{actor.name}}</option>
                     </select>
@@ -73,7 +73,7 @@
                 </div>
                 <div class="form-group">
                     <label>Genre Selection:</label>
-                    <select ng-model="G" class="form-control select2" multiple="multiple" data-placeholder="Select Genres"
+                    <select id="genres" ng-model="genres" class="form-control select2" multiple="multiple" data-placeholder="Select Genres"
                             style="width: 100%;">
                         <option  ng-repeat="genre in allGenres" value="{{genre.id}}">{{genre.name}}</option>
                     </select>
@@ -82,7 +82,7 @@
                 <div class="form-group">
                     <label for="exampleInputFile">Poster input:</label><br>
                     <label class="btn btn-primary">
-                        <input ng-model="P" type="file" id="exampleInputFile" style="display: none">
+                        <input ng-model="pos" type="file" id="file" style="display: none">
                         Add Poster
                     </label>
                     <p class="help-block">Choose Poster File Here.</p>
@@ -90,7 +90,7 @@
                 <!-- /.box-body -->
 
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-primary" ng-click="postData(title,description,duration,release,N,D,G,A,P)">ADD</button>
+                    <button type="submit" class="btn btn-primary" ng-click="postData(title,description,duration,release,na,dir,genres,actors,pos)">ADD</button>
                 </div>
             </div>
         </form>
