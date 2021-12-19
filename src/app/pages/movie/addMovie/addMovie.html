@@ -51,6 +51,7 @@
                 <div class="form-group">
                     <label>Nationality:</label>
                     <select id="nationality" ng-model="na" class="form-control select2" style="width: 100%;">
+                        <option value="">Select Movie's Nationality</option>
                         <option  ng-repeat="nationality in allNationalities" value="{{nationality.id}}">
                             {{nationality.name}}
                         </option>
@@ -58,7 +59,8 @@
                 </div>
                 <div class="form-group">
                     <label>Director Selection:</label>
-                    <select id="director" ng-model="dir" class="form-control select2" style="width: 100%;" data-placeholder="Select a Director">
+                    <select id="director" ng-model="dir" class="form-control select2" style="width: 100%;" >
+                        <option value="">Select Director</option>
                         <option  ng-repeat="director in allDirectors" value="{{director.id}}">{{director.name}}</option>
                     </select>
                 </div>
@@ -67,6 +69,7 @@
                     <label>Actors Selection:</label>
                     <select id="actors" ng-model="actors" class="form-control select2" multiple="multiple" data-placeholder="Select Actors"
                             style="width: 100%;">
+                        <option value="">Select Actors</option>
                         <option  ng-repeat="actor in allActors" value="{{actor.id}}">{{actor.name}}</option>
                     </select>
 
