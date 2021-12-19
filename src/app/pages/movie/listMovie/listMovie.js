@@ -16,7 +16,7 @@
      */
     function configFn($stateProvider) {
         $stateProvider.state('app.listMovie', {
-            url: '/movie',
+            url: '/listmovie',
             views: {
                 'content@app': {
                     templateUrl: 'app/pages/movie/listMovie/listMovie.html',

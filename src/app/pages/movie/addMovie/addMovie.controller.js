@@ -16,7 +16,7 @@
      */
     function configFn($stateProvider) {
         $stateProvider.state('app.addMovie', {
-            url: '/movie',
+            url: '/addmovie',
             views: {
                 'content@app': {
                     templateUrl: 'app/pages/movie/addMovie/addMovie.html',
@@ -32,7 +32,7 @@
      *
      * @constructor
      */
-    function ControllerFn($scope, $http) {
+    function ControllerFn($scope, $http, $location) {
         var vm = this;
         $scope.file = null;
         $scope.allNationalities = [];
@@ -81,9 +81,9 @@
             }
 
             data.nationality = data.nationality[0];
-            
+
             data.director = data.director[0];
-            
+
             data.actors = data.actors.map(actorId => Number(actorId));
 
             data.genres = data.genres.map(genreId => Number(genreId));
@@ -101,9 +101,13 @@
             dataForm.append("poster", data.poster);
 
             console.log(JSON.stringify(data));
-            $http.post("http://localhost:8080/api/movies", dataForm, {transformRequest: angular.identity,headers: {'Content-Type': undefined}})
+            $http.post("http://localhost:8080/api/movies", dataForm, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            })
                 .then(function success(response) {
                         console.log(response);
+                        $location.path('/listmovie');
                     }
                     , function error(response) {
                         console.log(response);
