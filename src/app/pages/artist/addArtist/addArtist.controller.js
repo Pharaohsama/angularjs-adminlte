@@ -36,7 +36,7 @@
         var vm = this;
 
         $scope.name = null;
-        $scope.type = null;
+        $scope.type= null;
         $scope.success = false;
         $scope.error = false;
         $scope.n = null;
@@ -49,12 +49,12 @@
                 })
         }
 
-        $scope.postData = function (name, type, n) {
+        $scope.postData = function (name,type,n) {
             //creating object to pass data to the service
             var data = {
                 name: name,
                 type: type,
-                nationality: n,
+                nationality : n ,
             }
             $http.post("http://localhost:8080/api/artists", JSON.stringify(data))
                 .then(function success(response) {

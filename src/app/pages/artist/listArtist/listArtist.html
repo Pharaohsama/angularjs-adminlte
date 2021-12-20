@@ -17,31 +17,43 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-        <table id="artistsData" class="table table-bordered table-striped">
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Nationality </th>
-            </tr>
-            </thead>
-            <tbody>
+            <table id="anassData" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Nationality </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
 
+                </tbody>
+<!--            <tr ng-repeat="artist in allArtists" >-->
+<!--                <td>{{artist.id}}</td>-->
+<!--                <td>{{artist.name}}</td>-->
+<!--                <td>{{artist.type}}</td>-->
+<!--                <td>{{artist.nationality.name}}</td>-->
+<!--                <td>{{artist.id}}</td>-->
+<!--                <td>-->
+<!--                    <span ng-click="vm.toggleEditForm()"><input type="submit" value="Edit"></span>-->
+<!--                    <span ng-click="vm.removeItem($index)"><input type="submit" value="Delete"> </span>-->
+<!--                </td>-->
+<!--            </tr>-->
+                <tfoot>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Nationality</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </tfoot>
+                </table>
 
-            </tbody>
-            <tfoot>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Nationality</th>
-
-
-
-            </tr>
-            </tfoot>
-        </table>
     </div>
     <!-- /.box-body -->
 </div>
