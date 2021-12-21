@@ -69,8 +69,16 @@
                     }
                 )
         }
-
         $scope.getData();
+        $scope.deleteData = (data) => {
+            $http.delete("http://localhost:8080/api/nationalities/" +data, JSON.stringify(data))
+                .then(function (response) {
+                    console.log(response);
+                    $scope.getData();
+                });
+        }
+
+
 
         function initialiseTable() {
             let table = $(document).ready(function () {
@@ -79,10 +87,27 @@
                     columns: [
                         {"data": "id"},
                         {"data": "name"},
+                        {   "data" : "id",
+                            render: function () {
+                                return '<button  class="btn btn-primary" onclick="$scope.deleteData(${data})"><i class="fa fa-edit"/></button>';
+                            }
+                        },
+                        {   "data" : "id",
+                            render: function (data) {
+                                return '<button  class="btn btn-primary" onclick="angular.element(this).scope().deleteData('+data+')"><i class="fa fa-trash"/></button>';
+                            }
+                        }
                     ]
                 });
             });
             return table;
+            var editor; // this one to make the table editable
+
+            $(document).ready(function () {
+                editor = new $.fn.dataTable.Editor({
+                    "table": "table",
+                })
+            })
         }
     }
 })();

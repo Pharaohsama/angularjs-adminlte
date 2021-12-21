@@ -32,7 +32,7 @@
      *
      * @constructor
      */
-    function ControllerFn($scope, $http) {
+    function ControllerFn($scope, $http, $location) {
         var vm = this;
 
         $scope.name = null;
@@ -59,45 +59,13 @@
         $scope.artist = $scope.name;
         $scope.artist = $scope.type;
         $scope.artist = $scope.nationality;
-        $scope.delete = (data) => {
-            console.log("it deleteing");
-
+        $scope.deleteData = (data) => {
+            $http.delete("http://localhost:8080/api/artists/" +data, JSON.stringify(data))
+                .then(function (response) {
+                    console.log(response);
+                   $scope.getData();
+                });
         }
-        // Edit record
-        $('table').on('click', 'td.editor-edit', function (e) {
-            alert()
-            console.log("this fucking works")
-
-        });
-
-
-
-        // Delete a record
-        // $(delete(data)).on('click', 'td.editor-delete', function (e) {
-        //     console.log("deleting ")
-
-               // var data = { id: id,} ;
-               // $http.post("http://localhost:8080/api/artists", JSON.stringify(data))
-               //     .then(function success(response) {
-               //             console.log(response);
-               //             $scope.name = null;
-               //             $scope.success = true;
-               //             $scope.error = false;
-               //             $scope.getData();
-               //             $scope.table.destroy();
-               //             initialiseTable();
-               //         }
-               //         , function error(response) {
-               //             console.log(response);
-               //             $scope.name = null;
-               //             $scope.error = true;
-               //             $scope.success = false;
-               //         }
-               //     )
-            $scope.delete = function(data){
-              alert()
-            };
-
 
 
         function initialiseTable() {
@@ -110,37 +78,29 @@
                         {"data": "name"},
                         {"data": "type"},
                         {"data": "nationality.name"},
-                        {
-                            "data ": "",
-                            className: "dt-center editor-edit",
-                            defaultContent: '<button type="button"  ><i class="fa fa-pencil"/></button>',
-                            orderable: false
+                        {   "data" : "id",
+                            render: function () {
+                                return '<button  class="btn btn-primary" onclick="$scope.deleteData(${data})"><i class="fa fa-edit"/></button>';
+                            }
                         },
-                        {
-                            "data ": "",
-                            className: "dt-center editor-delete",
-                            defaultContent: "<button type='button' click={{delete(data)}}><i class='fa fa-trash'/></button>",
-                            orderable: false
+                        {   "data" : "id",
+                            render: function (data) {
+                                return '<button  class="btn btn-primary" onclick="angular.element(this).scope().deleteData('+data+')"><i class="fa fa-trash"/></button>';
+                            }
                         }
-
-
-
-
-
                     ]
                 });
-
 
 
             });
             return table;
             var editor; // this one to make the table editable
 
-            $(document).ready(function() {
-                editor = new $.fn.dataTable.Editor( {
+            $(document).ready(function () {
+                editor = new $.fn.dataTable.Editor({
                     "table": "table",
-        })
-    })
+                })
+            })
         }
     }
 
