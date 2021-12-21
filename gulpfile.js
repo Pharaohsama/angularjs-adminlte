@@ -11,7 +11,7 @@ var sass = require('gulp-sass');
 var browserSync = require('browser-sync').create();
 
 //Minify JS codes
-var uglify = require('gulp-uglify');
+var uglify = require('gulp-uglify-es').default;
 
 //Filter files by extension and pass them to a callback
 var gulpIf = require('gulp-if');

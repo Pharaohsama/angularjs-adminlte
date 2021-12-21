@@ -26,6 +26,7 @@
   "dependencies": {
     "angular": "#^1.7.2",
     "admin-lte": "^2.4.8",
+    "angular-cookies": "^1.8.2",
     "angular-ui-router": "^1.0.19"
   }
 }

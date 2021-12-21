@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('adminlte', [
-        "ui.router"
+        "ui.router", "ngCookies"
     ]);
 
 })();

@@ -39,7 +39,7 @@
      * @param $http
      * @constructor
      */
-    function ControllerFn(UserService, $location, $scope, $http) {
+    function ControllerFn(UserService, $location, $scope, $http, $cookies) {
         var vm = this;
 
         vm.userData = {
