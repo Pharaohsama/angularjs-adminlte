@@ -40,6 +40,7 @@
         $scope.error = false;
         $scope.allGenres = [];
         $scope.table = initialiseTable();
+
         $scope.getData = () => {
             $http.get("http://localhost:8080/api/genres")
                 .then(function success(response) {
@@ -54,6 +55,7 @@
             var data = {
                 name: name,
             }
+
             $http.post("http://localhost:8080/api/genres", JSON.stringify(data))
                 .then(function success(response) {
                         console.log(response);

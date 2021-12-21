@@ -7,7 +7,7 @@
      * @ngInject
      * @type {string[]}
      */
-    ServiceFn.$inject = ["$location", "$rootScope", "$cookies"];
+    ServiceFn.$inject = ["$http","$location", "$rootScope", "$cookies"];
 
     /**
      * Service
@@ -16,7 +16,7 @@
      * @returns {{getUser: (function(): {name: null, image: null, registerDate: null, job: null}), isLogined: (function(): boolean), login: loginFn, logout: logoutFn}}
      * @constructor
      */
-    function ServiceFn($location, $rootScope, $cookies) {
+    function ServiceFn($http, $location, $rootScope, $cookies) {
 
         var user = {
             name: null,
@@ -40,9 +40,14 @@
         function isLoginedFn() {
             let globals = $cookies.getObject('globals');
             if(globals !== undefined){
-                user.name = globals.currentUser.name
+                user.name = globals.currentUser.name;
+                user.authorization = globals.currentUser.authorization;
+                $http.defaults.headers.common['Authorization'] = user.authorization;
                 return true;
             } else {
+                user.name = null;
+                user.authorization = null;
+                $http.defaults.headers.common['Authorization'] = null;
                 return false;
             }
         }
