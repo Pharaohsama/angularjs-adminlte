@@ -7,20 +7,24 @@
      * @ngInject
      * @type {string[]}
      */
-    ServiceFn.$inject = ["$location"];
+    ServiceFn.$inject = ["$location", "$rootScope"];
 
     /**
      * Service
      * @param $location
+     * @param $rootScope
+     * @param $cookieStore
      * @returns {{getUser: (function(): {name: null, image: null, registerDate: null, job: null}), isLogined: (function(): boolean), login: loginFn, logout: logoutFn}}
      * @constructor
      */
-    function ServiceFn($location) {
+    function ServiceFn($location, $rootScope) {
+
         var user = {
             name: null,
             image: null,
             registerDate: null,
-            job: null
+            job: null,
+            authorization: null
         };
 
         return {
@@ -39,10 +43,19 @@
         }
 
         function loginFn(userData) {
+
             user.name = userData.name;
             user.image = userData.image;
             user.registerDate = userData.registerDate;
             user.job = userData.job;
+            user.authorization = userData.authorization;
+
+            $rootScope.globals = {
+                currentUser: {
+                    name:  user.name,
+                    authorization: user.authorization
+                }
+            };
 
             $location.path("/");
         }
@@ -52,6 +65,9 @@
             user.image = null;
             user.registerDate = null;
             user.job = null;
+            user.authorization = null;
+
+            $rootScope.globals = {};
 
             $location.path("/login");
         }

@@ -27,15 +27,18 @@
         });
     }
 
+    ControllerFn.$inject = ["UserService", "$location", "$scope", "$http"];
+
     /**
      * Controller Function
      *
      * @constructor
      */
-    function ControllerFn($scope, $http, $location) {
+    function ControllerFn(UserService, $location, $scope, $http) {
         var vm = this;
         $scope.file = null;
         $scope.allNationalities = [];
+
         $scope.getData = () => {
             $http.get("http://localhost:8080/api/nationalities")
                 .then(function success(response) {

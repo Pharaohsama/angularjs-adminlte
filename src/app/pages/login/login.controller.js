@@ -28,23 +28,26 @@
         });
     }
 
-    ControllerFn.$inject = ["UserService", "$location"];
+    ControllerFn.$inject = ["UserService", "$location", "$scope", "$http"];
 
     /**
      * Controller Function
      *
+     * @param $scope
      * @param UserService
      * @param $location
+     * @param $http
      * @constructor
      */
-    function ControllerFn(UserService, $location) {
+    function ControllerFn(UserService, $location, $scope, $http) {
         var vm = this;
 
         vm.userData = {
-            name: "Alexander Pierce",
-            image: "/images/user2-160x160.jpg",
-            registerDate: "2012",
-            job: "Web Developer"
+            name: null,
+            image: null,
+            registerDate: null,
+            job: null,
+            authorization: null
         };
 
         vm.login = loginFn;
@@ -62,7 +65,31 @@
         });
 
         function loginFn() {
-            UserService.login(vm.userData);
+            let email = $scope.email;
+            let password = $scope.password;
+            let credentials = {
+                email,
+                password
+            }
+
+            var headers = credentials ?
+                {
+                    authorization: "Basic " + btoa(credentials.email + ":" + credentials.password)
+                }
+                : {};
+            $http.defaults.headers.common['Authorization'] = headers.authorization;
+            $http.post('http://localhost:8080/user').then(function success(response) {
+                console.log(response.data.name);
+                if (response.data.name) {
+                    vm.userData.name = response.data.name;
+                    vm.userData.authorization = headers.authorization
+                    UserService.login(vm.userData);
+                } else {
+                    vm.userData.name = null;
+                }
+            }, function error(error) {
+                console.log("error", error);
+            });
         }
     }
 })();
