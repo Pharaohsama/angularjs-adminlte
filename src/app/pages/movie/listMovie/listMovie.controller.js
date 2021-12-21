@@ -69,6 +69,11 @@
                 $scope.table = $('#moviesData').DataTable({
                     data: $scope.allMovies,
                     columns: [
+                        {"data" : "poster",
+                            render : function (data){
+                            return '<img height="75%" width="75%" src="'+data+'">'
+                            }
+                        },
                         {"data": "title"},
                         {"data": "durationInMin"},
                         {"data": "releaseDate"},
