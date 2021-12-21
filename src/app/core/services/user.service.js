@@ -38,6 +38,7 @@
         }
 
         function isLoginedFn() {
+            let globals = $cookies.getObject('globals');
             if(globals !== undefined){
                 user.name = globals.currentUser.name
                 return true;
