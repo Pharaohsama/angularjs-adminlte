@@ -63,7 +63,7 @@
                         $scope.success = true;
                         $scope.error = false;
                         $scope.getData();
-                        $location.path('/allartist')
+                        $location.path('/allartist');
                     }
                     , function error(response) {
                         console.log(response);
