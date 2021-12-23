@@ -100,7 +100,7 @@
             $http.post("http://localhost:8080/api/sessions", JSON.stringify(data))
                 .then(function success(response) {
                         console.log(response);
-                        // $location.path('/listSessions');
+                        $location.path('/listSession');
                     }
                     , function error(response) {
                         console.log(response);
@@ -108,6 +108,7 @@
                 )
         }
 
+        //jquery for getting the movie selected from the select options
         $('#select-movie').change( () => {
             let data = $('#select-movie option:selected').val();
             $scope.selectedMovie = JSON.parse(data);
