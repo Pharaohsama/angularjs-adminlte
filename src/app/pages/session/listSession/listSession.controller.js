@@ -57,6 +57,11 @@
                     $scope.getData();
                 });
         }
+        //for editing
+        $scope.editData = (data) => {
+
+
+        }
 
         function initialiseTable(){
             let table = $(document).ready(function (){
@@ -73,7 +78,7 @@
                         {
                             "data": "id",
                             render: function () {
-                                return '<button class="btn btn-primary" onclick=$scope.deleteData(${data})"><i class="fa fa-edit"/></button>';
+                                return '<button id="model" class="btn btn-primary" onclick=$scope.deleteData(${data})><i class="fa fa-edit"/></button>';
                             }
                         },
                         {   "data" : "id",

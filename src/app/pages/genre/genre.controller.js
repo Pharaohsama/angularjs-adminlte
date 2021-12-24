@@ -50,27 +50,36 @@
                     console.log($scope.allGenres);
                 })
         }
-        $scope.postData = function (name) {
-            //creating object to pass data to the service
-            var data = {
-                name: name,
-            }
+        $scope.postData = (name) => {
+            if (name == null) {
+                $scope.success = false;
+                $scope.error = true;
+            } else {
 
-            $http.post("http://localhost:8080/api/genres", JSON.stringify(data))
-                .then(function success(response) {
-                        console.log(response);
-                        $scope.name = null;
-                        $scope.success = true;
-                        $scope.error = false;
-                        $scope.getData();
-                    }
-                    , function error(response) {
-                        console.log(response);
-                        $scope.name = null;
-                        $scope.error = true;
-                        $scope.success = false;
-                    }
-                )
+
+                //creating object to pass data to the service
+
+                var data = {
+                    name: name,
+                }
+
+                $http.post("http://localhost:8080/api/genres", JSON.stringify(data))
+                    .then(function success(response) {
+                            console.log(response);
+                            $scope.name=null;
+                            $scope.success = true;
+                            $scope.error = false;
+                            $scope.getData();
+                        }
+                        , function error(response) {
+                            console.log(response);
+                            $scope.name = null;
+                            $scope.error = true;
+                            $scope.success = false;
+                            alert('retype the genre ');
+                        }
+                    )
+            }
         }
 
         $scope.getData();
@@ -103,13 +112,7 @@
                 });
             });
             return table;
-            var editor; // this one to make the table editable
 
-            $(document).ready(function () {
-                editor = new $.fn.dataTable.Editor({
-                    "table": "table",
-                })
-            })
         }
     }
 })();

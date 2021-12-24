@@ -26,17 +26,17 @@
                 <div class="form-group">
                     <label class="control-label" for="input-title">Movie Name:</label>
                     <input type="text" ng-model="title" class="form-control" id="input-title"
-                           placeholder="Enter Movie Name">
+                           placeholder="Enter Movie Name" required>
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="input-description">Movie Description:</label>
                     <input type="text" ng-model="description" class="form-control" id="input-description"
-                           placeholder="Enter Movie Description">
+                           placeholder="Enter Movie Description" required>
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="input-durationInMin">Movie Duration:</label>
                     <input type="number" ng-model="duration" class="form-control" id="input-durationInMin"
-                           placeholder="Enter Movie Duration in Minutes">
+                           placeholder="Enter Movie Duration in Minutes" required>
                 </div>
                 <div class="form-group">
                     <label>Release Date:</label>
@@ -45,7 +45,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        <input type="text" ng-model="release" class="form-control pull-right"  id="datepicker">
+                        <input type="text" ng-model="release" class="form-control pull-right"  id="datepicker" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -59,7 +59,7 @@
                 </div>
                 <div class="form-group">
                     <label>Director Selection:</label>
-                    <select id="director" ng-model="dir" class="form-control select2" style="width: 100%;" >
+                    <select id="director" ng-model="dir" class="form-control select2" style="width: 100%;" required>
                         <option value="">Select Director</option>
                         <option  ng-repeat="director in allDirectors" value="{{director.id}}">{{director.name}}</option>
                     </select>
@@ -68,7 +68,7 @@
                 <div class="form-group">
                     <label>Actors Selection:</label>
                     <select id="actors" ng-model="actors" class="form-control select2" multiple="multiple" data-placeholder="Select Actors"
-                            style="width: 100%;">
+                            style="width: 100%;" required>
                         <option value="">Select Actors</option>
                         <option  ng-repeat="actor in allActors" value="{{actor.id}}">{{actor.name}}</option>
                     </select>
@@ -77,12 +77,12 @@
                 <div class="form-group">
                     <label>Genre Selection:</label>
                     <select id="genres" ng-model="genres" class="form-control select2" multiple="multiple" data-placeholder="Select Genres"
-                            style="width: 100%;">
+                            style="width: 100%;" required>
                         <option  ng-repeat="genre in allGenres" value="{{genre.id}}">{{genre.name}}</option>
                     </select>
 
                 </div>
-                <input type="file" ng-model="file" id="file">
+                <input type="file" ng-model="file" id="file" required>
                 <!-- /.box-body -->
 
                 <div class="box-footer">

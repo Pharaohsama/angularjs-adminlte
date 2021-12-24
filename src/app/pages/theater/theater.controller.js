@@ -49,35 +49,40 @@
                     console.log($scope.allTheaters);
                 })
         }
-        $scope.postData = function (name) {
-            //creating object to pass data to the service
-            var data = {
-                name: name,
+        $scope.postData = (name)=> {
+            if (name == null) {
+                $scope.success = false;
+                $scope.error = true;
+            } else {
+                //creating object to pass data to the service
+                var data = {
+                    name: name,
+                }
+                $http.post("http://localhost:8080/api/theaters", JSON.stringify(data))
+                    .then(function success(response) {
+                            console.log(response);
+                            $scope.name = null;
+                            $scope.success = true;
+                            $scope.error = false;
+                            $scope.getData();
+                        }
+                        , function error(response) {
+                            console.log(response);
+                            $scope.name = null;
+                            $scope.error = true;
+                            $scope.success = false;
+                        }
+                    )
             }
-            $http.post("http://localhost:8080/api/theaters", JSON.stringify(data))
-                .then(function success(response) {
-                        console.log(response);
-                        $scope.name = null;
-                        $scope.success = true;
-                        $scope.error = false;
-                        $scope.getData();
-                    }
-                    , function error(response) {
-                        console.log(response);
-                        $scope.name = null;
-                        $scope.error = true;
-                        $scope.success = false;
-                    }
-                )
-        }
 
-        $scope.getData();
-        $scope.deleteData = (data) => {
-            $http.delete("http://localhost:8080/api/theaters/" +data, JSON.stringify(data))
-                .then(function (response) {
-                    console.log(response);
-                    $scope.getData();
-                });
+            $scope.getData();
+            $scope.deleteData = (data) => {
+                $http.delete("http://localhost:8080/api/theaters/" + data, JSON.stringify(data))
+                    .then(function (response) {
+                        console.log(response);
+                        $scope.getData();
+                    });
+            }
         }
 
         function initialiseTable() {

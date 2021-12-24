@@ -27,13 +27,13 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" ng-model="sessionDate" class="form-control pull-right"  id="datepicker">
+                            <input type="text" ng-model="sessionDate" class="form-control pull-right"  id="datepicker" required>
                         </div>
                     </div>
                 <div class="form-group">
                 <form name="myform">
                     <label >Movie :</label>
-                    <select ng-model="movie" class="form-control" style="width: 100%;" id="select-movie">
+                    <select ng-model="movie" class="form-control" style="width: 100%;" id="select-movie" required>
                         <option value="" >Select Movie ....</option>
                         <option  ng-repeat="movie in allMovies" value="{{movie}} "  >
                             {{movie.title}}
@@ -45,7 +45,7 @@
                 <div class="form-group">
                     <form name="myform">
                         <label >Theater :</label>
-                        <select  name="theater" ng-model="theater" class="form-control" style="width: 100%;">
+                        <select  name="theater" ng-model="theater" class="form-control" style="width: 100%;" required>
                             <option value="">Select Theater ....</option>
                             <option  ng-repeat="theater in allTheaters" value="{{theater.id}}">
                                 {{theater.name}}
@@ -64,7 +64,7 @@
                     <label class="control-label">Start of a session :</label><br>
                     <input id="timeId" type="time" style="width:60%" value="00:00"><br>
                     <p>The cinema sessions  hours start from 9am to 11pm</p>
-                    <input type="button" value="set Time" class="btn btn-primary" ng-click="timeSession(startTime)">
+                    <input type="button" value="set Time" class="btn btn-primary" ng-click="timeSession(startTime)" required>
                             </td>
                             <td>
                     <i class="fa fa-fw fa-hourglass-half" style="color:RED" ></i><p style="color:RED" > End Session</p>
@@ -76,7 +76,7 @@
                 <!-- /.box-body -->
 
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-primary" ng-click="PostData(sessionDate,theater,start,endSession)">ADD</button>
+                    <button type="submit" class="btn btn-primary" ng-click="PostData(sessionDate,theater,start,endSession)">Creat</button>
                 </div>
             </div>
         </form>
