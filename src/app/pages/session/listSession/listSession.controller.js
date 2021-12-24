@@ -29,7 +29,7 @@
      * 
      * @constructor
      */
-    function ControllerFn($scope,$http){
+    function ControllerFn($scope,$http,$state){
         var vm = this;
         $scope.movie = null;
         $scope.duration = null
@@ -48,7 +48,7 @@
 
             })
         }
-        $scope.getData();
+         $scope.getData();
         //for deleting
         $scope.deleteData = (data) => {
             $http.delete("http://localhost:8080/api/sessions/" +data,JSON.stringify(data))
@@ -59,6 +59,8 @@
         }
         //for editing
         $scope.editData = (data) => {
+            $state.go("app.sessionEdit", {id:data});
+            //in this function we just redirect
 
 
         }
@@ -77,8 +79,8 @@
                         {"data" : "endTime"},
                         {
                             "data": "id",
-                            render: function () {
-                                return '<button id="model" class="btn btn-primary" onclick=$scope.deleteData(${data})><i class="fa fa-edit"/></button>';
+                            render: function (data) {
+                                return '<button  class="btn btn-primary" onclick="angular.element(this).scope().editData('+ data +')"><i class="fa fa-edit"/></button>';
                             }
                         },
                         {   "data" : "id",
@@ -90,13 +92,7 @@
                 });
             });
             return table;
-            var editor; // this one to make the table editable
 
-            $(document).ready(function () {
-                editor = new $.fn.dataTable.Editor({
-                    "table": "table",
-                })
-            })
         }
 
     }

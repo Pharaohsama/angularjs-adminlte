@@ -107,13 +107,7 @@
                 });
             });
             return table;
-            var editor; // this one to make the table editable
 
-            $(document).ready(function () {
-                editor = new $.fn.dataTable.Editor({
-                    "table": "table",
-                })
-            })
         }
     }
 })();
