@@ -1,0 +1,94 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Movies
+        <small>Control panel</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Movies</li>
+        <li class="active">Edit</li>
+    </ol>
+</section>
+
+<!-- /.content -->
+<section class="content">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Editing Movie</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form role="form">
+            <div class="box-body">
+
+
+                <div class="form-group">
+                    <label class="control-label">Movie Name:</label>
+                    <input type="text" ng-model="movie.title" class="form-control" id="input-title"
+                           placeholder="Enter Movie Name" required>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="input-description">Movie Description:</label>
+                    <input type="text" ng-model="movie.description" class="form-control" id="input-description"
+                           placeholder="Enter Movie Description" required>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="input-durationInMin">Movie Duration:</label>
+                    <input type="number" ng-model="movie.durationInMin" class="form-control" id="input-durationInMin"
+                           placeholder="Enter Movie Duration in Minutes" required>
+                </div>
+                <div class="form-group">
+                    <label>Release Date:</label>
+
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <input type="text" ng-model="movie.releaseDate" class="form-control pull-right"  id="datepicker" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Nationality:</label>
+                    <select id="nationality" class="form-control select2" style="width: 100%;">
+                        <option value="">Select Movie's Nationality</option>
+                        <option  ng-repeat="nationality in allNationalities" value="{{nationality.id}}">
+                            {{nationality.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Director Selection:</label>
+                    <select id="director"  class="form-control select2" style="width: 100%;" required>
+                        <option value="">Select Director</option>
+                        <option  ng-repeat="director in allDirectors" value="{{director.id}}">{{director.name}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Actors Selection:</label>
+                    <select id="actors"  class="form-control select2" multiple="multiple" data-placeholder="Select Actors"
+                            style="width: 100%;" required>
+                        <option value="">Select Actors</option>
+                        <option  ng-repeat="actor in allActors" value="{{actor.id}}">{{actor.name}}</option>
+                    </select>
+
+                </div>
+                <div class="form-group">
+                    <label>Genre Selection:</label>
+                    <select id="genres"  class="form-control select2" multiple="multiple" data-placeholder="Select Genres"
+                            style="width: 100%;" required>
+                        <option  ng-repeat="genre in allGenres" value="{{genre.id}}">{{genre.name}}</option>
+                    </select>
+
+                </div>
+                <input type="file" ng-model="file" id="file" required>
+                <!-- /.box-body -->
+
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary" ng-click="postData(movie.title,movie.description,movie.durationInMin,movie.releaseDate,na,dir,genres,actors,pos)">Edit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

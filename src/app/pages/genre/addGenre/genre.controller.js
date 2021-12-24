@@ -19,7 +19,7 @@
             url: '/genre',
             views: {
                 'content@app': {
-                    templateUrl: 'app/pages/genre/genre.html',
+                    templateUrl: 'app/pages/genre/addGenre/genre.html',
                     controller: ControllerFn,
                     controllerAs: 'vmGenre'
                 }
@@ -32,7 +32,7 @@
      *
      * @constructor
      */
-    function ControllerFn($scope, $http) {
+    function ControllerFn($scope, $http,$state) {
         var vm = this;
 
         $scope.name = null;
@@ -66,7 +66,7 @@
                 $http.post("http://localhost:8080/api/genres", JSON.stringify(data))
                     .then(function success(response) {
                             console.log(response);
-                            $scope.name=null;
+                            $scope.name = null;
                             $scope.success = true;
                             $scope.error = false;
                             $scope.getData();
@@ -84,11 +84,15 @@
 
         $scope.getData();
         $scope.deleteData = (data) => {
-            $http.delete("http://localhost:8080/api/genres/" +data, JSON.stringify(data))
+            $http.delete("http://localhost:8080/api/genres/" + data, JSON.stringify(data))
                 .then(function (response) {
                     console.log(response);
                     $scope.getData();
                 });
+        }
+        $scope.editData = (data) => {
+            // console.log(data);
+            $state.go("app.editGenre", {id: data});
         }
 
         function initialiseTable() {
@@ -98,14 +102,16 @@
                     columns: [
                         {"data": "id"},
                         {"data": "name"},
-                        {   "data" : "id",
-                            render: function () {
-                                return '<button  class="btn btn-primary" onclick="$scope.deleteData(${data})"><i class="fa fa-edit"/></button>';
+                        {
+                            "data": "id",
+                            render: function (data) {
+                                return '<button  class="btn btn-primary" onclick="angular.element(this).scope().editData(' + data + ')"><i class="fa fa-edit"/></button>';
                             }
                         },
-                        {   "data" : "id",
+                        {
+                            "data": "id",
                             render: function (data) {
-                                return '<button  class="btn btn-primary" onclick="angular.element(this).scope().deleteData('+data+')"><i class="fa fa-trash"/></button>';
+                                return '<button  class="btn btn-primary" onclick="angular.element(this).scope().deleteData(' + data + ')"><i class="fa fa-trash"/></button>';
                             }
                         }
                     ]

@@ -1,0 +1,44 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Genre
+        <small>Control panel</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Genre</li>
+        <li class="active">Edit</li>
+
+    </ol>
+</section>
+
+<!-- /.content -->
+<section class="content">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Adding genre</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form role="form">
+            <div class="box-body">
+
+
+                <div ng-class="{'form-group': true, 'has-success':success,'has-error':error}">
+                    <label ng-show="!(success || error)" class="control-label" for="input-genre" ng-model="name">Genre </label>
+                    <label ng-show="success" class="control-label" for="input-genre"><i class="fa fa-check"></i> Genre
+                    </label>
+                    <label ng-show="error" class="control-label" for="input-genre"><i class="fa fa-times-circle-o"></i>
+                        Genre </label>
+
+                    <input type="text" ng-model="name" class="form-control" id="input-genre"
+                           placeholder="Enter genre(action,comedy...)" required >
+                </div>
+            </div>
+            <!-- /.box-body -->
+
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary" ng-click="patchData(name)">Edit</button>
+            </div>
+        </form>
+    </div>

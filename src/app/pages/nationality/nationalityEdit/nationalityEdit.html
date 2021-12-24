@@ -24,11 +24,11 @@
 
                 <div ng-class="{'form-group': true, 'has-success':success,'has-error':error}">
                     <label ng-show="!(success || error)" class="control-label"
-                           for="input-nationality">Nationality</label>
+                           for="input-nationality" ng-model="name">Nationality</label>
                     <label ng-show="success" class="control-label" for="input-nationality"><i class="fa fa-check"></i>
                         Nationality </label>
                     <label ng-show="error" class="control-label" for="input-nationality"><i
-                            class="fa fa-times-circle-o" ng-model="name"></i> Nationality </label>
+                            class="fa fa-times-circle-o" ></i> Nationality </label>
 
                     <input type="text" ng-model="name" class="form-control" id="input-nationality"
                            placeholder="Enter nationalities" required>

@@ -79,17 +79,8 @@
         }
         $scope.editData = (data) => {
             // console.log(data);
-
             $state.go("app.editNationality", {id: data});
 
-            $http.post("/editNationality", {id: data})
-                .then(function success(response) {
-                        console.log(response);
-                    }
-                    , function error(response) {
-                        console.log(response);
-                    }
-                );
 
         }
 

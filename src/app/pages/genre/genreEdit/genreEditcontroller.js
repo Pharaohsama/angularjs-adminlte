@@ -15,13 +15,13 @@
      * @param $stateProvider
      */
     function configFn($stateProvider) {
-        $stateProvider.state('app.editNationality', {
-            url: '/editNationality/:id',
+        $stateProvider.state('app.editGenre', {
+            url: '/editGenre/:id',
             views: {
                 'content@app': {
-                    templateUrl: 'app/pages/nationality/nationalityEdit/nationalityEdit.html',
+                    templateUrl: 'app/pages/genre/genreEdit/genreEdit.html',
                     controller: ControllerFn,
-                    controllerAs: 'vmNationalityEdit'
+                    controllerAs: 'vmGenreEdit'
                 }
             }
         });
@@ -32,35 +32,35 @@
      *
      * @constructor
      */
-    function ControllerFn($scope, $http, $stateParams, $location) {
+    function ControllerFn($scope, $http, $stateParams,$location) {
         var vm = this;
         $scope.name = null;
         $scope.id = null;
         $scope.success = false;
         $scope.error = false;
-        var nationalityId = $stateParams.id;
+        var genreId =  $stateParams.id;
 
         $scope.getData = () => {
-            $http.get("http://localhost:8080/api/nationalities/" + nationalityId)
+            $http.get("http://localhost:8080/api/genres/"+genreId)
                 .then(function success(response) {
                     $scope.name = response.data.name;
                     console.log($scope.name);
                 })
         }
         $scope.patchData = function (name) {
-            //creating object to pass data to the service
+            //creating object to pass data to the srvice
             var data = {
-                id: nationalityId,
+                id: genreId,
                 name: name,
             }
-            $http.patch("http://localhost:8080/api/nationalities/" + nationalityId, JSON.stringify(data))
+            $http.patch("http://localhost:8080/api/genres/"+genreId, JSON.stringify(data))
                 .then(function success(response) {
                         console.log(response);
                         $scope.name = null;
                         $scope.success = true;
                         $scope.error = false;
                         $scope.getData();
-                        $location.path('/nationality');
+                        $location.path('/genre');
                     }
                     , function error(response) {
                         console.log(response);
@@ -71,5 +71,6 @@
                 )
         }
         $scope.getData();
+
     }
 })();
