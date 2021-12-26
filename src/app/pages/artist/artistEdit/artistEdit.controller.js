@@ -15,13 +15,13 @@
      * @param $stateProvider
      */
     function configFn($stateProvider) {
-        $stateProvider.state('app.artist', {
-            url: '/artist',
+        $stateProvider.state('app.editArtist', {
+            url: '/editArtist/:id',
             views: {
                 'content@app': {
-                    templateUrl: 'app/pages/artist/addArtist/addArtist.html',
+                    templateUrl: 'app/pages/artist/artistEdit/artistEdit.html',
                     controller: ControllerFn,
-                    controllerAs: 'vmArtist'
+                    controllerAs: 'vmArtistEdit'
                 }
             }
         });
@@ -32,7 +32,7 @@
      *
      * @constructor
      */
-    function ControllerFn($scope, $http, $location) {
+    function ControllerFn($scope, $http, $location,$stateParams) {
         var vm = this;
 
         $scope.name = null;
@@ -41,22 +41,31 @@
         $scope.error = false;
         $scope.n = null;
         $scope.allNationalities = [];
+        //this the usage of stateParams
+        var artistId = $stateParams.id;
+        console.log(artistId);
         $scope.getData = () => {
             $http.get("http://localhost:8080/api/nationalities")
                 .then(function success(response) {
                     $scope.allNationalities = response.data;
                     console.log($scope.allNationalities);
+                }),
+            $http.get("http://localhost:8080/api/artists/" +artistId)
+                .then(function success(response){
+                    $scope.name = response.data.name;
+                    console.log($scope.name);
                 })
         }
 
-        $scope.postData = function (name,type,n) {
-            //creating object to pass data to the service
+        $scope.patchData = function (name,type,n) {
+            //creating object to pass data to the srvice
             var data = {
+                id: artistId,
                 name: name,
                 type: type,
-                nationality : n ,
+                nationality : n,
             }
-            $http.post("http://localhost:8080/api/artists", JSON.stringify(data))
+            $http.patch("http://localhost:8080/api/artists/"+artistId, JSON.stringify(data))
                 .then(function success(response) {
                         console.log(response);
                         $scope.name = null;

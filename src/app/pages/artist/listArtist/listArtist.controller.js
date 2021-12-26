@@ -32,7 +32,7 @@
      *
      * @constructor
      */
-    function ControllerFn($scope, $http, $location) {
+    function ControllerFn($scope, $http,$state) {
         var vm = this;
 
         $scope.name = null;
@@ -59,12 +59,18 @@
         $scope.artist = $scope.name;
         $scope.artist = $scope.type;
         $scope.artist = $scope.nationality;
+        //this is for deleting
         $scope.deleteData = (data) => {
             $http.delete("http://localhost:8080/api/artists/" +data, JSON.stringify(data))
                 .then(function (response) {
                     console.log(response);
                    $scope.getData();
                 });
+        }
+        //this is for editing
+        $scope.editData = (data) =>{
+            $state.go("app.editArtist",{id: data});
+            //we use state to redirect and send data to another page
         }
 
 
@@ -79,8 +85,8 @@
                         {"data": "type"},
                         {"data": "nationality.name"},
                         {   "data" : "id",
-                            render: function () {
-                                return '<button  class="btn btn-primary" onclick="$scope.deleteData(${data})"><i class="fa fa-edit"/></button>';
+                            render: function (data) {
+                                return '<button  class="btn btn-primary" onclick="angular.element(this).scope().editData('+ data +')"><i class="fa fa-edit"/></button>';
                             }
                         },
                         {   "data" : "id",
