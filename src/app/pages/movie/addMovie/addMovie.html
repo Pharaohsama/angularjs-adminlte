@@ -23,8 +23,10 @@
             <div class="box-body">
 
 
-                <div class="form-group">
-                    <label class="control-label" for="input-title">Movie Name:</label>
+                <div ng-class="{'form-group' : true , 'has-success':success ,'has-error':error}">
+                    <label ng-show="!(success || error )" class="control-label" for="input-title">Movie Name:</label>
+                    <label ng-show="success" class="control-label" for="input-title"><i class="fa fa-check"></i>Movie name :</label>
+                    <label ng-show="error" class="control-label" for="input-title"><i class="fa fa-times-circle-o"></i>Movie name :</label>
                     <input type="text" ng-model="title" class="form-control" id="input-title"
                            placeholder="Enter Movie Name" required>
                 </div>

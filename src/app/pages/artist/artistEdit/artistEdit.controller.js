@@ -51,6 +51,7 @@
                     $scope.allNationalities = response.data;
                     console.log($scope.allNationalities);
                 }),
+                // for grabing one artist by id
             $http.get("http://localhost:8080/api/artists/" +artistId)
                 .then(function success(response){
                     //this for artist name placeholder

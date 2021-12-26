@@ -50,28 +50,37 @@
         }
 
         $scope.postData = function (name,type,n) {
-            //creating object to pass data to the service
-            var data = {
-                name: name,
-                type: type,
-                nationality : n ,
+            // for the validation
+            if (name == null) {
+                $scope.success = false;
+                $scope.error = true;
+            } else {
+                $scope.success = true;
+                $scope.error = false;
+
+                //creating object to pass data to the service
+                var data = {
+                    name: name,
+                    type: type,
+                    nationality: n,
+                }
+                $http.post("http://localhost:8080/api/artists", JSON.stringify(data))
+                    .then(function success(response) {
+                            console.log(response);
+                            $scope.name = null;
+                            $scope.success = true;
+                            $scope.error = false;
+                            $scope.getData();
+                            $location.path('/allartist');
+                        }
+                        , function error(response) {
+                            console.log(response);
+                            $scope.name = null;
+                            $scope.error = true;
+                            $scope.success = false;
+                        }
+                    )
             }
-            $http.post("http://localhost:8080/api/artists", JSON.stringify(data))
-                .then(function success(response) {
-                        console.log(response);
-                        $scope.name = null;
-                        $scope.success = true;
-                        $scope.error = false;
-                        $scope.getData();
-                        $location.path('/allartist');
-                    }
-                    , function error(response) {
-                        console.log(response);
-                        $scope.name = null;
-                        $scope.error = true;
-                        $scope.success = false;
-                    }
-                )
         }
 
         $scope.getData();

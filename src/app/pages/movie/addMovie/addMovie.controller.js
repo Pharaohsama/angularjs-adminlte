@@ -37,6 +37,8 @@
     function ControllerFn(UserService, $location, $scope, $http) {
         var vm = this;
         $scope.file = null;
+        $scope.error = false ;
+        $scope.success = false ;
         $scope.allNationalities = [];
 
         $scope.getData = () => {
@@ -70,52 +72,61 @@
         })
 
         $scope.postData = function (title, description, duration, release, na, dir, actors, genres, pos) {
-            var dataForm = new FormData();
-            var data = {
-                title: title,
-                description: description,
-                durationInMin: duration,
-                releaseDate: $('#datepicker').val(),
-                nationality: $('#nationality').val(),
-                director: $('#director').val(),
-                actors: $('#actors').val(),
-                genres: $('#genres').val(),
-                poster: file.files[0],
+            if (title == null) {
+                $scope.error = true;
+                $scope.success = false;
+            } else {
+                $scope.success = true;
+                $scope.error = false;
+
+
+                var dataForm = new FormData();
+                var data = {
+                    title: title,
+                    description: description,
+                    durationInMin: duration,
+                    releaseDate: $('#datepicker').val(),
+                    nationality: $('#nationality').val(),
+                    director: $('#director').val(),
+                    actors: $('#actors').val(),
+                    genres: $('#genres').val(),
+                    poster: file.files[0],
+                }
+
+                data.nationality = data.nationality[0];
+
+                data.director = data.director[0];
+
+                data.actors = data.actors.map(actorId => Number(actorId));
+
+                data.genres = data.genres.map(genreId => Number(genreId));
+
+                console.log(data.releaseDate);
+
+                dataForm.append("title", data.title);
+                dataForm.append("description", data.description);
+                dataForm.append("durationInMin", data.durationInMin);
+                dataForm.append("releaseDate", data.releaseDate);
+                dataForm.append("nationality", data.nationality);
+                dataForm.append("director", data.director);
+                dataForm.append("actors", data.actors);
+                dataForm.append("genres", data.genres);
+                dataForm.append("poster", data.poster);
+
+                console.log(JSON.stringify(data));
+                $http.post("http://localhost:8080/api/movies", dataForm, {
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined}
+                })
+                    .then(function success(response) {
+                            console.log(response);
+                            $location.path('/listmovie');
+                        }
+                        , function error(response) {
+                            console.log(response);
+                        }
+                    )
             }
-
-            data.nationality = data.nationality[0];
-
-            data.director = data.director[0];
-
-            data.actors = data.actors.map(actorId => Number(actorId));
-
-            data.genres = data.genres.map(genreId => Number(genreId));
-
-            console.log(data.releaseDate);
-
-            dataForm.append("title", data.title);
-            dataForm.append("description", data.description);
-            dataForm.append("durationInMin", data.durationInMin);
-            dataForm.append("releaseDate", data.releaseDate);
-            dataForm.append("nationality", data.nationality);
-            dataForm.append("director", data.director);
-            dataForm.append("actors", data.actors);
-            dataForm.append("genres", data.genres);
-            dataForm.append("poster", data.poster);
-
-            console.log(JSON.stringify(data));
-            $http.post("http://localhost:8080/api/movies", dataForm, {
-                transformRequest: angular.identity,
-                headers: {'Content-Type': undefined}
-            })
-                .then(function success(response) {
-                        console.log(response);
-                        $location.path('/listmovie');
-                    }
-                    , function error(response) {
-                        console.log(response);
-                    }
-                )
         }
         $('.select2').select2()
     }
