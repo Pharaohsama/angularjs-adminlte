@@ -49,23 +49,32 @@
                 })
         }
         $scope.postData = function(name) {
-            //creating object to pass data to the service
-            var data = {
-                name: name,
+            //for validation
+            if (name == null) {
+                $scope.success = false;
+                $scope.error = true;
+            } else {
+                $scope.success = true;
+                $scope.error = false;
+
+                //creating object to pass data to the service
+                var data = {
+                    name: name,
+                }
+                $http.post("http://localhost:8080/api/theaters", JSON.stringify(data))
+                    .then(function success(response) {
+                        console.log(response);
+                        $scope.name = null;
+                        $scope.success = true;
+                        $scope.error = false;
+                        $scope.getData();
+                    }, function error(response) {
+                        console.log(response);
+                        $scope.name = null;
+                        $scope.error = true;
+                        $scope.success = false;
+                    });
             }
-            $http.post("http://localhost:8080/api/theaters", JSON.stringify(data))
-                .then(function success(response) {
-                    console.log(response);
-                    $scope.name = null;
-                    $scope.success = true;
-                    $scope.error = false;
-                    $scope.getData();
-                }, function error(response) {
-                    console.log(response);
-                    $scope.name = null;
-                    $scope.error = true;
-                    $scope.success = false;
-                });
         }
         $scope.getData();
         $scope.deleteData = (data) => {
