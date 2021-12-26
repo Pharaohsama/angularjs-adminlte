@@ -51,6 +51,7 @@
         $scope.postData = function(name) {
             //for validation
             if (name == null) {
+                //for the animation of success or error
                 $scope.success = false;
                 $scope.error = true;
             } else {

@@ -42,6 +42,7 @@
         $scope.n = null;
         $scope.allNationalities = [];
         //this the usage of stateParams
+        //allow us to grap the id send in state
         var artistId = $stateParams.id;
         console.log(artistId);
         $scope.getData = () => {
@@ -52,6 +53,7 @@
                 }),
             $http.get("http://localhost:8080/api/artists/" +artistId)
                 .then(function success(response){
+                    //this for artist name placeholder
                     $scope.name = response.data.name;
                     console.log($scope.name);
                 })
