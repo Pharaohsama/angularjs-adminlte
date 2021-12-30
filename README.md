@@ -1,10 +1,10 @@
-# AngularJS AdminLTE
+# AngularJS CinemaShow
 
-**AngularJS AdminLTE** is an AngularJS implemention for **[AdminLTE HTML Theme](https://github.com/almasaeed2010/AdminLTE)**.
+**AngularJS** is an AngularJS implemention for **[AdminLTE HTML Theme](https://github.com/almasaeed2010/AdminLTE)**.
 
 ### Installing
 
-1- "npm install" (Node.Js required)
+1- "npm install" versigon 11.0.0  (Node.Js required)
 
 2- "bower install"
 
@@ -12,7 +12,10 @@
 
 - **"gulp build"** Builds the site under dist directory. 
 - **"gulp serve"** Serves the site. You must run "gulp build" first because vendor files generates by this command. 
+### to log in 
 
+- **userName** : admin@admin.com
+- **Password**:admin
 ### Todos
 
 - ~~Ckeditor gives error.~~
